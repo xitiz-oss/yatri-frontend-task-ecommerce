@@ -58,14 +58,14 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 h-screen  bg-white border-r border-gray-200 shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 h-screen  bg-[#283841] text-white border-r border-gray-200 shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:static lg:shadow-none w-64`}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-gray-800">E-Store</h1>
+            <h2 className="text-xl font-bold">E-com-Store</h2>
           </div>
 
           {/* Navigation */}
@@ -80,8 +80,8 @@ export default function Sidebar() {
                   href={canAccess ? item.href : '/auth/login'}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                     isActive(item.href)
-                      ? 'bg-[#283841]/10 text-[#283841] border border-[#283841]/30'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
+                      ? 'bg-white text-[#283841] border border-[#283841]/30'
+                      : 'text-white hover:bg-gray-50 hover:text-gray-800'
                   } ${!canAccess ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -114,17 +114,17 @@ export default function Sidebar() {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-800 truncate">
+                    <p className="text-sm font-medium truncate">
                       {session.user?.name}
                     </p>
-                    <p className="text-xs text-gray-500 truncate">
+                    <p className="text-xs  truncate">
                       {session.user?.email}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => signOut()}
-                  className="flex items-center gap-3 w-full px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-lg transition-colors duration-200"
+                  className="flex items-center gap-3 w-full px-4 py-2  hover:bg-gray-50 hover:text-gray-800 rounded-lg transition-colors duration-200"
                 >
                   <LogOut size={16} />
                   <span className="text-sm">Sign Out</span>

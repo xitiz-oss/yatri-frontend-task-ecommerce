@@ -41,7 +41,7 @@ export default function Home() {
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
-    setCurrentPage(1);
+    // setCurrentPage(1);
     
     if (!query.trim()) {
       setFilteredProducts(products);
@@ -51,6 +51,7 @@ export default function Home() {
     try {
       const results = await searchProducts(query);
       setFilteredProducts(results);
+      setCurrentPage(1)
       
       if (results.length === 0) {
         toast.error('No products found matching your search');
@@ -68,6 +69,9 @@ export default function Home() {
   }, [filteredProducts, currentPage]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+
+
+  console.log(currentPage)
 
   if (error) {
     return (

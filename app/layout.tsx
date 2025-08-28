@@ -33,9 +33,9 @@ export default async function RootLayout({
       <body className="font-sa">
         <SessionProvider session={session}>
           <StoreProvider>
-            <div className="flex h-screen bg-gray-50">
+            <div className="flex h-screen bg-gray-100">
               <Sidebar />
-              <main className="flex-1 lg:ml-0 h-screen overflow-auto">
+              <main className="flex-1 lg:ml-0 h-screen overflow-auto ">
                 <div className="lg:hidden h-16"></div>
                 {children}
               </main>
