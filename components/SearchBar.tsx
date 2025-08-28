@@ -25,7 +25,7 @@ export default function SearchBar({ onSearch, placeholder = "Search products..."
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-[30vw]">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
         <input

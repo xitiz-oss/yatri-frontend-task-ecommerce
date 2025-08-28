@@ -57,6 +57,12 @@ const cartSlice = createSlice({
       state.total = totals.total;
       state.totalItems = totals.totalItems;
     },
+
+    isInCart:(state, action: PayloadAction<{id: number}>) => {
+        const item = state.items.find(item => item.id === action.payload.id);
+        ig 
+
+    },
     
     clearCart: (state) => {
       state.items = [];
