@@ -16,7 +16,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     if (status === 'loading') return; // Still loading
     
     if (!session) {
-      router.push('/auth/signin');
+      router.push('/auth/login');
     }
   }, [session, status, router]);
 

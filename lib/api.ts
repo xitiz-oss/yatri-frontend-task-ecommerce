@@ -12,7 +12,7 @@ export async function fetchProducts(limit?: number): Promise<Product[]> {
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -21,15 +21,17 @@ export async function fetchProducts(limit?: number): Promise<Product[]> {
 }
 
 export async function fetchProduct(id: string): Promise<Product> {
+    
   try {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+    const url = `https://fakestoreapi.com/products/${id}`
+    const response = await fetch(url, {
       next: { revalidate: 3600 }
     });
     
     if (!response.ok) {
       throw new Error('Failed to fetch product');
     }
-    
+  
     return await response.json();
   } catch (error) {
     console.error('Error fetching product:', error);

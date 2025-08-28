@@ -25,6 +25,7 @@ export default function Home() {
         setLoading(true);
         setError(null);
         const data = await fetchProducts();
+
         setProducts(data);
         setFilteredProducts(data);
       } catch (error) {
