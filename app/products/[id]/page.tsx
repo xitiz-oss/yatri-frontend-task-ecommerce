@@ -3,19 +3,16 @@ import { fetchProduct } from "@/lib/api";
 import ProductDetail from "./ProductDetail";
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
   try {
-    const product = await fetchProduct(params.id);
-
-    if (!product) {
-      notFound(); // Renders the 404 page
-    }
-
+    // Await the params Promise to resolve it
+    const { id } = await params;
+    const product = await fetchProduct(id);
     return <ProductDetail product={product} />;
   } catch (error) {
     notFound();
