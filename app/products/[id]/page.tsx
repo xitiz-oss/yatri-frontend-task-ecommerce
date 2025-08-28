@@ -10,7 +10,8 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   try {
-    const product = await fetchProduct(params.id);
+    const {id} = params
+    const product = await fetchProduct(id);
     return <ProductDetail product={product} />;
   } catch (error) {
     notFound();
