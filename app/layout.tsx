@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import SessionProvider from "next-auth"
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 
