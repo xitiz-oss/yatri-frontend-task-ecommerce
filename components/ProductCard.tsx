@@ -6,7 +6,7 @@ import { RootState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/lib/store/cartSlice";
 import { Product } from "@/types/product";
-import { Star, ShoppingCart, DollarSign } from "lucide-react";
+import { ShoppingCart, Star, Check } from "lucide-react";
 import { toast } from "react-toastify";
 
 interface ProductCardProps {
@@ -15,7 +15,6 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
   const isInCart = cartItems.some((item) => item.id === product.id);
   const dispatch = useDispatch();
 
@@ -27,64 +26,80 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Link href={`/products/${product.id}`}>
-      <div className="relative w-full">
-        <div className=" w-full h-[34vh] flex flex-col bg-white rounded-2xl shadow-md transition-all duration-300 group relative ">
-          {/* Image with gradient overlay section */}
-          <div className="h-[55%] w-full overflow-hidden rounded-t-2xl relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 z-10"></div>
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+    <Link href={`/products/${product.id}`} className="group block">
+      <div className="bg-white rounded-2xl overflow-hidden border border-gray-100/50 hover:border-gray-200 transition-all duration-500 hover:shadow-xl hover:shadow-gray-100/20 hover:-translate-y-1">
+        
+        {/* Image Container */}
+        <div className="relative h-48 overflow-hidden bg-gray-50/50">
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="object-contain p-4 group-hover:scale-105 transition-transform duration-700 ease-out"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            className={`absolute top-3 right-3 w-9 h-9 rounded-full transition-all duration-300 backdrop-blur-md border flex items-center justify-center ${
+              isInCart 
+                ? 'bg-[#283841] border-[#283841] text-white shadow-lg shadow-[#283841]/20' 
+                : 'bg-white/90 border-white/60 text-[#283841] hover:bg-white hover:scale-110 hover:shadow-md'
+            }`}
+            title={isInCart ? "Added to cart" : "Add to cart"}
+          >
+            {isInCart ? (
+              <Check size={16} className="animate-in zoom-in duration-200" />
+            ) : (
+              <ShoppingCart size={16} />
+            )}
+          </button>
+        </div>
 
-            <div className="absolute top-3 right-3 z-20">
-              <button
-                onClick={handleAddToCart}
-                className={`bg-white/90 p-2 rounded-full shadow-md transition-all duration-300  ${
-                  isInCart ? "bg-yellow-500 text-white" : "bg-white/90"
-                }`}
-                title="Add to cart"
-              >
-                <ShoppingCart size={16} />
-              </button>
-            </div>
-          </div>
-
-          {/* Content section with improved styling */}
-          <div className="flex flex-col h-[40%] px-4 py-3">
-            {/* University info section */}
-            <div className="mb-2 flex-1">
-              <div className="flex items-start justify-between">
-                <div className="relative flex-1">
-                  <div className=" ">
-                    <h2 className="text-lg font-bold text-[#283841] line-clamp-1 cursor-pointer transition-colors duration-300">
-                      {product.title}
-                    </h2>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-1">
-                <span className="font-medium text-sm  text-[#283841]/70">
-                  {product.description.substring(0, 50)}...
+        {/* Content */}
+        <div className="p-4 space-y-3">
+          
+          {/* Title */}
+          <h2 className="font-semibold text-[#283841] text-lg leading-tight line-clamp-1 group-hover:text-[#283841]/80 transition-colors">
+            {product.title}
+          </h2>
+          
+          {/* Description */}
+          <p className="text-[#283841]/60 text-sm line-clamp-2 leading-relaxed">
+            {product.description.length > 60 
+              ? `${product.description.substring(0, 60)}...` 
+              : product.description
+            }
+          </p>
+          
+          {/* Price Section */}
+          <div className="pt-2 border-t border-gray-100/80">
+            <div className="flex items-center justify-between">
+              <div className="flex items-baseline space-x-1">
+                <span className="text-lg font-semibold text-[#283841]">
+                  ${product.price}
                 </span>
               </div>
-            </div>
-
-            {/* Location and menu section with a subtle separator */}
-            <div className="pt-2 border-t border-gray-100">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-1.5 overflow-hidden">
-                  <DollarSign size={18} className="flex-shrink-0" />
-                  <span className="font-medium text-sm text-[#283841] truncate">
-                    {product.price}
+              <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < Math.floor(product.rating.rate)
+                            ? "text-yellow-400 fill-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[#283841]/60 font-medium text-sm">
+                    {product.rating.rate} 
                   </span>
                 </div>
-              </div>
+              
+              
             </div>
           </div>
         </div>

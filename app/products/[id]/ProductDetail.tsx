@@ -2,10 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { RootState } from "@/lib/store";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/lib/store/cartSlice";
 import { Product } from "@/types/product";
-import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
+import {
+  Star,
+  ShoppingCart,
+  ArrowLeft,
+  Shield,
+  RotateCcw,
+  Truck,
+  Check
+} from "lucide-react";
 import { toast } from "react-toastify";
 
 interface ProductDetailProps {
@@ -14,6 +23,10 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const isInCart = cartItems.some((item) => item.id === product.id);
+
+  console.log(product);
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
@@ -21,94 +34,132 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6 transition-colors"
-      >
-        <ArrowLeft size={20} />
-        Back to Products
-      </Link>
+    <div className="min-h-screen bg-gray-50/30">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        {/* Back Button */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-[#283841]/70 hover:text-[#283841] mb-8 transition-colors group"
+        >
+          <ArrowLeft
+            size={18}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
+          <span className="font-medium">Back to Products</span>
+        </Link>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
-          {/* Product Image */}
-          <div className="aspect-square relative bg-gray-50 rounded-lg overflow-hidden">
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              className="object-contain p-8"
-              priority
-            />
-          </div>
+        {/* Main Product Container */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100/50 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            {/* Product Image Section */}
+            <div className="relative bg-gradient-to-br from-gray-50/50 to-gray-100/30 flex items-center justify-center p-12 lg:p-16">
+              <div className="relative w-full max-w-md aspect-square">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  className="object-contain drop-shadow-lg"
+                  priority
+                />
+              </div>
+            </div>
 
-          {/* Product Info */}
-          <div className="space-y-6">
-            <div>
-              <div className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-3">
+            {/* Product Info Section */}
+            <div className="p-8 lg:p-12 space-y-8">
+              {/* Category Badge */}
+              <div className="inline-block bg-[#283841]/5 text-[#283841] text-sm font-medium px-4 py-2 rounded-full border border-[#283841]/10">
                 {product.category}
               </div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-4">
-                {product.title}
-              </h1>
 
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-5 h-5 ${
-                        i < Math.floor(product.rating.rate)
-                          ? "text-yellow-400 fill-yellow-400"
-                          : "text-gray-300"
-                      }`}
-                    />
-                  ))}
+              {/* Title & Rating */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-4xl font-bold text-[#283841] leading-tight">
+                    {product.title}
+                  </h2>
+                  <h2 className="text-2xl font-bold text-[#283841]">
+                    ${product.price}
+                  </h2>
                 </div>
-                <span className="text-gray-600">
-                  {product.rating.rate} ({product.rating.count} reviews)
-                </span>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < Math.floor(product.rating.rate)
+                            ? "text-yellow-400 fill-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[#283841]/60 font-medium">
+                    {product.rating.rate} · {product.rating.count} reviews
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <div className="text-4xl font-bold text-gray-900">
-              ${product.price}
-            </div>
+              {/* Description */}
+              <div className="space-y-6">
+                <p className="text-[#283841]/70 leading-relaxed text-lg">
+                  {product.description}
+                </p>
 
-            <div className="prose max-w-none">
-              <p className="text-gray-600 leading-relaxed">
-                {product.description}
-              </p>
-            </div>
+                {/* Add to Cart Button */}
+                <button
+                  onClick={handleAddToCart}
+                  disabled={isInCart}
+                  className="w-full bg-[#283841] text-white py-5 px-8 rounded-2xl hover:bg-[#283841]/90 transition-all duration-300 flex items-center justify-center gap-3 text-lg font-semibold shadow-lg shadow-[#283841]/20  hover:-translate-y-0.5"
+                >
+                  {isInCart ? <Check size={24} /> : <ShoppingCart size={24} />}
+                  {isInCart ? "Added " : "Add to Cart"}
+                </button>
+              </div>
 
-            <div className="space-y-4 pt-4">
-              <button
-                onClick={handleAddToCart}
-                className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2 text-lg font-medium"
-              >
-                <ShoppingCart size={24} />
-                Add to Cart
-              </button>
-
-              <div className="grid grid-cols-3 gap-4 text-center text-sm text-gray-500">
-                <div className="flex flex-col items-center">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                    ✓
+              {/* Features Grid */}
+              <div className="pt-6">
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="text-center space-y-3">
+                    <div className="w-12 h-12 bg-[#283841]/5 rounded-2xl flex items-center justify-center mx-auto">
+                      <Truck size={20} className="text-[#283841]" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="font-semibold text-[#283841] text-sm">
+                        Free Shipping
+                      </p>
+                      <p className="text-[#283841]/50 text-xs">
+                        On orders over $50
+                      </p>
+                    </div>
                   </div>
-                  <span>Free Shipping</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                    ↩
+
+                  <div className="text-center space-y-3">
+                    <div className="w-12 h-12 bg-[#283841]/5 rounded-2xl flex items-center justify-center mx-auto">
+                      <RotateCcw size={20} className="text-[#283841]" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="font-semibold text-[#283841] text-sm">
+                        Easy Returns
+                      </p>
+                      <p className="text-[#283841]/50 text-xs">30-day policy</p>
+                    </div>
                   </div>
-                  <span>Easy Returns</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-                    ★
+
+                  <div className="text-center space-y-3">
+                    <div className="w-12 h-12 bg-[#283841]/5 rounded-2xl flex items-center justify-center mx-auto">
+                      <Shield size={20} className="text-[#283841]" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="font-semibold text-[#283841] text-sm">
+                        Warranty
+                      </p>
+                      <p className="text-[#283841]/50 text-xs">
+                        2 year coverage
+                      </p>
+                    </div>
                   </div>
-                  <span>2 Year Warranty</span>
                 </div>
               </div>
             </div>
