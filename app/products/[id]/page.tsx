@@ -10,8 +10,12 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   try {
-    const {id} = params
-    const product = await fetchProduct(id);
+    const product = await fetchProduct(params.id);
+
+    if (!product) {
+      notFound(); // Renders the 404 page
+    }
+
     return <ProductDetail product={product} />;
   } catch (error) {
     notFound();
