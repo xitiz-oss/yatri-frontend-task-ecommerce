@@ -58,7 +58,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 h-screen  bg-[#283841] text-white border-r border-gray-200 shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 h-screen  bg-[#121a23] text-white border-r border-gray-200 shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:static lg:shadow-none w-64`}
       >
@@ -133,7 +133,7 @@ export default function Sidebar() {
             ) : (
               <Link
                 href="/auth/login"
-                className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-lg transition-colors duration-200"
+                className="flex items-center gap-3 px-4 py-2 text-white hover:bg-gray-50 hover:text-gray-800 rounded-lg transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
                 <LogIn size={16} />

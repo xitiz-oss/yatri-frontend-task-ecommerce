@@ -74,7 +74,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               {/* Title & Rating */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-4xl font-bold text-[#283841] leading-tight">
+                  <h2 className="text-3xl font-bold text-[#283841] leading-tight">
                     {product.title}
                   </h2>
                   <h2 className="text-2xl font-bold text-[#283841]">
@@ -103,7 +103,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
               {/* Description */}
               <div className="space-y-6">
-                <p className="text-[#283841]/70 leading-relaxed text-lg">
+                <p className="text-[#283841]/70 leading-relaxed text-md">
                   {product.description}
                 </p>
 

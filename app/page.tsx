@@ -53,9 +53,7 @@ export default function Home() {
       setFilteredProducts(results);
       setCurrentPage(1)
       
-      if (results.length === 0) {
-        toast.error('No products found matching your search');
-      }
+      
     } catch (error) {
       toast.error('Search failed');
       setFilteredProducts([]);
