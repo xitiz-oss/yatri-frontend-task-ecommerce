@@ -49,7 +49,7 @@ export default function CheckoutPage() {
             </div>
             <a
               href="/"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-block bg-[#283841] text-white px-6 py-3 rounded-lg hover:bg-[#283841]/80 transition-colors"
             >
               Continue Shopping
             </a>
@@ -72,7 +72,7 @@ export default function CheckoutPage() {
             </p>
             <a
               href="/"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-block bg-[#283841] text-white px-6 py-3 rounded-lg hover:bg-[#283841]/80 transition-colors"
             >
               Continue Shopping
             </a>
@@ -85,7 +85,7 @@ export default function CheckoutPage() {
   return (
     <ProtectedRoute>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">Checkout</h1>
+        <h2 className="text-3xl font-bold text-gray-800 mb-8">Checkout</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Summary */}
@@ -190,7 +190,7 @@ export default function CheckoutPage() {
                 type="button"
                 onClick={handlePlaceOrder}
                 disabled={processing}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-[#283841] text-white py-3 px-4 rounded-lg hover:bg-[#283841]/80 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {processing
                   ? "Processing..."

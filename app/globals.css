@@ -26,5 +26,23 @@
 body {
   background: var(--background);
   color: var(--primary);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../asset/satoshi-cdnfonts/Satoshi-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Recoleta';
+  src: url('../asset/recoleta-fonts/Recoleta\ SemiBold.otf');
+}
+
+* {
+  font-family: "Satoshi", sans-serif;
+}
+
+h2{
+   font-family: "Recoleta", sans-serif;
 }

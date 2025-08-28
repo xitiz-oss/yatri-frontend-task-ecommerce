@@ -18,7 +18,7 @@ export default function CartPage() {
           <p className="text-gray-600 mb-6">Add some products to get started!</p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 bg-[#283841] text-white px-6 py-3 rounded-lg hover:bg-[#283841]/80 transition-colors"
           >
             Continue Shopping
             <ArrowRight size={20} />
@@ -30,7 +30,7 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h1>
+      <h2 className="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
@@ -64,7 +64,7 @@ export default function CartPage() {
           <div className="space-y-3">
             <Link
               href="/checkout"
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-center font-medium block"
+              className="w-full bg-[#283841] text-white py-3 px-4 rounded-lg hover:bg-[#283841]/80 transition-colors duration-200 text-center font-medium block"
             >
               Proceed to Checkout
             </Link>

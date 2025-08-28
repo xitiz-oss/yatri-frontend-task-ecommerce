@@ -80,7 +80,7 @@ export default function Sidebar() {
                   href={canAccess ? item.href : '/auth/login'}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                     isActive(item.href)
-                      ? 'bg-blue-50 text-blue-600 border border-blue-200'
+                      ? 'bg-[#283841]/10 text-[#283841] border border-[#283841]/30'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
                   } ${!canAccess ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => setIsOpen(false)}
@@ -88,7 +88,7 @@ export default function Sidebar() {
                   <Icon size={20} />
                   <span className="font-medium">{item.label}</span>
                   {item.href === '/cart' && totalItems > 0 && (
-                    <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1 min-w-[20px] text-center">
+                    <span className="ml-auto bg-red-400 text-white text-xs rounded-full p-1 size-6  text-center">
                       {totalItems}
                     </span>
                   )}
@@ -102,7 +102,7 @@ export default function Sidebar() {
             {session ? (
               <div className="space-y-2">
                 <div className="flex items-center gap-3 px-4 py-2">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-[#283841] rounded-full flex items-center justify-center">
                     {session.user?.image ? (
                       <img
                         src={session.user.image}

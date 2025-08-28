@@ -9,7 +9,7 @@ import SearchBar from '@/components/SearchBar';
 import Pagination from '@/components/Pagination';
 import {toast} from 'react-toastify'
 
-const PRODUCTS_PER_PAGE = 6;
+const PRODUCTS_PER_PAGE = 8;
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -89,7 +89,7 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Products</h1>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">Products</h2>
         <SearchBar onSearch={handleSearch} />
       </div>
 

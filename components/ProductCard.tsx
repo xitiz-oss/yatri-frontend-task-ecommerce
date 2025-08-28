@@ -61,9 +61,9 @@ export default function ProductCard({ product }: ProductCardProps) {
               <div className="flex items-start justify-between">
                 <div className="relative flex-1">
                   <div className=" ">
-                    <h1 className="text-lg font-bold text-[#283841] line-clamp-1 cursor-pointer transition-colors duration-300">
+                    <h2 className="text-lg font-bold text-[#283841] line-clamp-1 cursor-pointer transition-colors duration-300">
                       {product.title}
-                    </h1>
+                    </h2>
                   </div>
                 </div>
               </div>

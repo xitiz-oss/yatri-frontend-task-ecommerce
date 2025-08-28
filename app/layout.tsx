@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import Head from 'next/head';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import SessionProvider from '@/lib/utils/SessionProvider';
@@ -8,7 +8,6 @@ import StoreProvider from '@/lib/utils/StoreProvider';
 import Sidebar from '@/components/Layout/Sidebar';
 import {ToastContainer} from 'react-toastify'
 
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'E-Store - Modern E-commerce App',
@@ -26,7 +25,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <Head>
+        <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="/xitiz-profile.png?v=2"  />
+      
+      </Head>
+      <body className="font-sa">
         <SessionProvider session={session}>
           <StoreProvider>
             <div className="flex h-screen bg-gray-50">
