@@ -4,9 +4,9 @@ import { Inter } from 'next/font/google';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import SessionProvider from '@/lib/utils/SessionProvider';
-// import StoreProvider from '@/lib/utils/StoreProvider';
+import StoreProvider from '@/lib/utils/StoreProvider';
 import Sidebar from '@/components/Layout/Sidebar';
-import ToastContainer from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -34,15 +34,7 @@ export default async function RootLayout({
                 {children}
               </main>
             </div>
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                duration: 3000,
-                style: {
-                  background: '#363636',
-                  color: '#fff',
-                },
-              }}
+            <ToastContainer
             />
           </StoreProvider>
         </SessionProvider>
